@@ -4,7 +4,7 @@ numberToWord n
   |(n > 9) && (n < 20)    = teens !! (n - 10)
   | n < 20                = shortNumber20 n
   | n < 100               = tensName !! ((n `div` 10)-1) `hyphen` numberToWord (n `mod` 10)
-  |(n > 99) && (n < 1000) = shortNumber20 (n `div` 100) `hyphen`  numberToWord (n `mod` 100)
+  |(n > 99) && (n < 1000) = hundredHyphen (shortNumber20 (n `div` 100)) `hyphen`  numberToWord (n `mod` 100)
   | otherwise   = "frog"
 
 tensName = ["","twenty","thirty","fourty","fifty","sixty","seventy","eighty","ninety"]
@@ -16,6 +16,8 @@ hyphen "" y =  y
 hyphen x "" = x
 hyphen x y = x ++ "-" ++ y
 
+hundredHyphen ::  String -> String
+hundredHyphen x =  x ++ "-" ++ "hundred"
 
 shortNumber20 :: Int -> String
 shortNumber20 n =
